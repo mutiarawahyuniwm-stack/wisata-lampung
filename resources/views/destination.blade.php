@@ -4,172 +4,193 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ $destination->nama }} | Wisata Lampung</title>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
-            :root {
-                --primary: #0f766e;
-                --primary-dark: #115e59;
-                --accent: #f59e0b;
-                --soft: #ecfeff;
-                --text: #1f2937;
-                --muted: #6b7280;
-                --bg: #f4fbf9;
-            }
-
             * { box-sizing: border-box; }
             body {
                 margin: 0;
-                font-family: Arial, Helvetica, sans-serif;
-                background:
-                    radial-gradient(circle at top left, rgba(16,185,129,0.12), transparent 25%),
-                    radial-gradient(circle at bottom right, rgba(14,165,233,0.12), transparent 25%),
-                    var(--bg);
-                color: var(--text);
+                background: #dfeeea;
+                color: #1f2d34;
+                font-family: 'Inter', sans-serif;
             }
-
             a { text-decoration: none; }
-            .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
-
-            header {
-                background: linear-gradient(135deg, rgba(15, 118, 110, 0.96), rgba(14, 116, 144, 0.92));
-                color: white;
-                padding: 18px 0;
-                box-shadow: 0 18px 45px -30px rgba(15, 118, 110, 0.8);
+            .topbar {
+                background: rgba(18, 53, 61, 0.96);
+                border-bottom: 1px solid rgba(255,255,255,0.08);
             }
-
-            .nav {
+            .topbar-inner {
+                max-width: 1240px;
+                margin: 0 auto;
+                padding: 0 18px;
+                min-height: 64px;
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
-                gap: 16px;
+                justify-content: space-between;
+                gap: 18px;
             }
-
-            .brand { font-size: 1.4rem; font-weight: 700; }
-            .nav-links { display: flex; align-items: center; gap: 18px; }
-            .nav-links a { color: white; opacity: 0.95; }
-
-            .btn {
-                display: inline-block;
-                padding: 12px 22px;
-                border-radius: 999px;
-                font-weight: 700;
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                color: #fff;
+                font-weight: 800;
+                font-size: 1rem;
             }
-            .btn-primary {
-                background: linear-gradient(135deg, #fbbf24, #f59e0b);
-                color: #111827;
-                box-shadow: 0 18px 40px -20px rgba(245, 158, 11, 0.7);
+            .brand-badge {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #e5d44d, #64d6c5);
+                border: 2px solid rgba(255,255,255,0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
             }
-
-            .hero {
-                padding: 42px 0 32px;
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 28px;
+                font-size: 0.9rem;
             }
-
-            .hero-card {
+            .nav-links a {
+                color: rgba(255,255,255,0.9);
+                font-weight: 500;
+            }
+            .content {
+                max-width: 1240px;
+                margin: 0 auto;
+                padding: 30px 18px 60px;
+            }
+            .detail-wrapper {
+                max-width: 1040px;
+                margin: 0 auto;
                 display: grid;
                 grid-template-columns: 1.1fr 0.9fr;
-                gap: 30px;
-                background: rgba(255,255,255,0.82);
-                border: 1px solid rgba(15,118,110,0.12);
-                border-radius: 30px;
+                gap: 0;
+                border-radius: 26px;
                 overflow: hidden;
-                box-shadow: 0 26px 70px -35px rgba(15, 23, 42, 0.28);
-                backdrop-filter: blur(5px);
+                background: rgba(255,255,255,0.12);
             }
-
-            .hero-image {
-                min-height: 420px;
+            .detail-image {
+                min-height: 430px;
                 background-size: cover;
                 background-position: center;
-                position: relative;
+                border-radius: 26px 0 0 26px;
+                box-shadow: 0 25px 55px -35px rgba(15, 23, 42, 0.35);
             }
-
-            .hero-image::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(180deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.2));
+            .detail-card {
+                background: rgba(255,255,255,0.72);
+                padding: 28px 30px 24px;
+                border-radius: 0 26px 26px 0;
+                border: 1px solid rgba(162,179,183,0.35);
+                border-left: none;
+                box-shadow: 0 25px 55px -35px rgba(15, 23, 42, 0.35);
             }
-
-            .hero-content {
-                padding: 30px 28px;
-            }
-
-            .tag {
+            .category {
                 display: inline-block;
-                background: linear-gradient(135deg, #ecfeff, #ecfdf5);
-                color: var(--primary-dark);
-                border-radius: 999px;
+                background: rgba(17, 89, 82, 0.08);
+                color: #0a5a53;
                 padding: 8px 12px;
-                font-weight: 700;
-                margin-bottom: 12px;
-            }
-
-            h1 {
-                margin: 0 0 12px;
-                font-size: clamp(2rem, 3vw, 3rem);
-                color: #0f172a;
-            }
-
-            .meta {
-                color: var(--muted);
-                font-size: 0.98rem;
-                line-height: 1.7;
-                margin-bottom: 18px;
-            }
-
-            .price {
-                display: inline-block;
-                font-size: 1.2rem;
+                border-radius: 9999px;
+                font-size: 0.72rem;
+                letter-spacing: 0.16em;
                 font-weight: 800;
-                color: var(--primary-dark);
-                background: rgba(16,185,129,0.08);
-                border: 1px solid rgba(16,185,129,0.1);
-                padding: 10px 14px;
+                text-transform: uppercase;
+            }
+            .detail-card h1 {
+                margin: 18px 0 16px;
+                font-size: clamp(2.2rem, 3vw, 3.1rem);
+                line-height: 1.03;
+                font-weight: 900;
+                letter-spacing: -0.04em;
+                color: #1e2b33;
+            }
+            .meta {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+                color: #4d5f69;
+                font-size: 0.9rem;
+            }
+            .meta-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .dot {
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background: #10b981;
+                display: inline-block;
+            }
+            .price-box {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 42px;
+                padding: 0 18px;
+                margin-top: 20px;
                 border-radius: 12px;
-                margin-bottom: 20px;
+                background: rgba(93, 220, 196, 0.18);
+                color: #0d5f5a;
+                font-size: 1.05rem;
+                font-weight: 900;
             }
-
             .description {
-                color: var(--muted);
+                margin-top: 18px;
+                color: rgba(31, 45, 52, 0.8);
+                font-size: 0.95rem;
                 line-height: 1.8;
-                margin-bottom: 24px;
             }
-
             .feature-list {
-                margin: 0;
+                margin: 20px 0 0;
                 padding-left: 18px;
-                color: var(--text);
+                color: #1f2d34;
                 line-height: 2;
+                font-size: 0.95rem;
             }
-
-            .bottom-bar {
+            .actions {
                 display: flex;
                 gap: 14px;
-                flex-wrap: wrap;
-                margin-top: 22px;
+                margin-top: 24px;
             }
-
-            .secondary {
-                background: #e2e8f0;
-                color: #0f172a;
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 44px;
+                padding: 0 20px;
+                border-radius: 9999px;
+                border: 1px solid rgba(148,163,184,0.35);
+                font-size: 0.8rem;
+                font-weight: 800;
             }
-
+            .btn.secondary {
+                background: rgba(255,255,255,0.85);
+                color: #1f2d34;
+            }
+            .btn.primary {
+                background: linear-gradient(135deg, #f5d76d, #f0b742);
+                color: #10232d;
+                border: none;
+            }
             @media (max-width: 860px) {
-                .hero-card {
-                    grid-template-columns: 1fr;
-                }
-
-                .nav {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
+                .detail-wrapper { grid-template-columns: 1fr; }
+                .detail-image, .detail-card { border-radius: 26px; border-left: 1px solid rgba(162,179,183,0.35); }
+                .nav-links { display: none; }
             }
         </style>
     </head>
     <body>
-        <header>
-            <div class="container nav">
-                <div class="brand">Wisata Lampung</div>
-                <nav class="nav-links">
+        <header class="topbar">
+            <div class="topbar-inner">
+                <div class="brand">
+                    <div class="brand-badge">🌴</div>
+                    <span>Wisata Lampung</span>
+                </div>
+                <nav class="nav-links" aria-label="Main navigation">
                     <a href="{{ route('home') }}">Beranda</a>
                     <a href="{{ route('home') }}#wisata">Wisata</a>
                     <a href="{{ route('home') }}#kontak">Kontak</a>
@@ -177,28 +198,31 @@
             </div>
         </header>
 
-        <main class="container hero">
-            <section class="hero-card">
-                <div class="hero-image" style="background-image: url('{{ $destination->gambar }}');"></div>
-                <div class="hero-content">
-                    <span class="tag">{{ $destination->kategori }}</span>
+        <main class="content">
+            <section class="detail-wrapper">
+                <div class="detail-image" style="background-image: url('{{ $destination->gambar }}');"></div>
+
+                <div class="detail-card">
+                    <span class="category">{{ $destination->kategori }}</span>
                     <h1>{{ $destination->nama }}</h1>
+
                     <div class="meta">
-                        <div>📍 {{ $destination->lokasi }}</div>
-                        <div>🕒 Wisata alam & keluarga</div>
+                        <div class="meta-item"><span class="dot"></span> {{ $destination->lokasi }}</div>
+                        <div class="meta-item"><span class="dot"></span> Wisata alam & keluarga</div>
                     </div>
-                    <div class="price">{{ $destination->harga }}</div>
-                    <p class="description">{{ $destination->deskripsi }}</p>
+
+                    <div class="price-box">{{ $destination->harga }}</div>
+                    <div class="description">{{ $destination->deskripsi }}</div>
 
                     <ul class="feature-list">
-                        @foreach ($features as $feature)
-                            <li>{{ $feature }}</li>
-                        @endforeach
+                        <li>Pemandangan alam yang menawan dan tenang.</li>
+                        <li>Cocok untuk liburan keluarga, teman, maupun solo traveler.</li>
+                        <li>Spot foto yang instagramable dan pengalaman tak terlupakan.</li>
                     </ul>
 
-                    <div class="bottom-bar">
+                    <div class="actions">
                         <a href="{{ route('home') }}#wisata" class="btn secondary">Kembali</a>
-                        <a href="#" class="btn btn-primary">Pesan Sekarang</a>
+                        <a href="{{ route('register') }}" class="btn primary">Pesan Sekarang</a>
                     </div>
                 </div>
             </section>

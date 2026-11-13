@@ -58,8 +58,8 @@
         </div>
 
         <div class="pt-2">
-            <x-primary-button class="w-full justify-center rounded-2xl bg-gradient-to-r from-[#0f766e] to-[#f59e0b] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-amber-500/20 transition hover:translate-y-[-1px] hover:shadow-xl hover:shadow-amber-500/20">
-                {{ __('Register') }}
+            <x-primary-button class="w-full justify-center rounded-2xl bg-gradient-to-r from-[#0f766e] to-[#f59e0b] px-5 py-3 text-xs font-black tracking-[0.18em] text-white shadow-lg shadow-amber-500/20 transition hover:translate-y-[-1px] hover:shadow-xl hover:shadow-amber-500/20">
+                {{ __('REGISTER') }}
             </x-primary-button>
         </div>
 

@@ -145,6 +145,24 @@ body::after {
     transform: translateY(-2px);
 }
 
+.nav-btn,
+.action-btn,
+.destination-footer a,
+.cta-strip a,
+.form-card button,
+.submit-btn {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease, opacity 0.22s ease;
+}
+
+.nav-btn:hover,
+.action-btn:hover,
+.destination-footer a:hover,
+.cta-strip a:hover,
+.submit-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+}
+
 .feature-card {
     position: relative;
     overflow: hidden;

@@ -1,22 +1,13 @@
 <x-guest-layout>
-    <x-auth-session-status class="mb-5" :status="session('status')" />
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
     @if (session('error'))
-        <div class="mb-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+        <div class="mb-4 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700">
             {{ session('error') }}
         </div>
     @endif
 
-    <div class="mb-5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-        <p class="font-semibold text-slate-800">
-            {{ $role === 'admin' ? 'Login Admin' : 'Login User' }}
-        </p>
-        <p class="mt-1">
-            {{ $role === 'admin' ? 'Akses khusus administrator untuk mengelola website.' : 'Login untuk masuk ke dashboard pengguna.' }}
-        </p>
-    </div>
-
-    <form method="POST" action="{{ $role === 'admin' ? route('admin.login.store') : route('login') }}" class="space-y-5">
+    <form method="POST" action="{{ $role === 'admin' ? route('admin.login.store') : route('login') }}" class="space-y-4">
         @csrf
 
         <div>
@@ -47,7 +38,7 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center justify-between gap-3 pt-1">
             <label for="remember_me" class="inline-flex items-center gap-2 text-sm text-slate-600">
                 <input id="remember_me" type="checkbox" class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500" name="remember">
                 <span>{{ __('Remember me') }}</span>
@@ -61,8 +52,8 @@
         </div>
 
         <div class="pt-2">
-            <x-primary-button class="w-full justify-center rounded-2xl {{ $role === 'admin' ? 'bg-gradient-to-r from-[#0f172a] to-[#7c3aed]' : 'bg-gradient-to-r from-[#0f766e] to-[#0f172a]' }} px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:translate-y-[-1px] hover:shadow-xl hover:shadow-teal-500/20">
-                {{ $role === 'admin' ? 'Masuk sebagai Admin' : 'Log in' }}
+            <x-primary-button class="w-full justify-center rounded-2xl bg-gradient-to-r from-[#0f766e] to-[#f59e0b] px-5 py-3 text-xs font-black tracking-[0.18em] text-white shadow-lg shadow-amber-500/20 transition hover:translate-y-[-1px] hover:shadow-xl hover:shadow-amber-500/20">
+                {{ $role === 'admin' ? __('ADMIN LOGIN') : __('LOGIN') }}
             </x-primary-button>
         </div>
 
